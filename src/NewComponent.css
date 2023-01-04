@@ -1,0 +1,15 @@
+.hero{
+    background: #292929;
+    color:#fff;
+}
+
+.hero_name{
+    color: #ec0e55;
+}
+
+.hero_hp{
+    color:greenyellow;
+}
+.hero_mp{
+    color:cornflowerblue;
+}
