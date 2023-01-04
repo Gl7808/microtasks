@@ -1,4 +1,4 @@
-import './NewComponent.css';
+import './map.css';
 
 type NewStudentsType = {
     id: number,
@@ -10,7 +10,7 @@ type NewComponentType = {
     students: Array<NewStudentsType>
 }
 
-export const NewComponent = (props: NewComponentType) => {
+export const Map = (props: NewComponentType) => {
     return (
         <ul>
             {props.students.map((objectFromStudentArray, index) => {
