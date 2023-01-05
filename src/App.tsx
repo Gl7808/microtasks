@@ -1,34 +1,47 @@
 import React, {useState, MouseEvent} from 'react';
 import './App.css'
-import {Btn, LBTN, NewBtn} from "./components/button";
 
+type FilterType ='all' | 'RUBLES' | 'Dollars'
 function App() {
+    const [money, setMoney] = useState([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLES', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLES', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLES', value: 50, number: ' v1234567890'},
+    ])
+    const [Btn, setBtn] = useState<FilterType>('all')
 
-    const Button1Foo = (subscriber:string,age:number) => {
-        console.log(subscriber,age)
+    let currentMoney = money;
+    if (Btn === 'Dollars') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'Dollars')
     }
-    const Button2Foo = (subscriber:string,age:number) => {
-        console.log(subscriber,age)
+    if (Btn === 'RUBLES') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'RUBLES')
     }
-    const Button3Foo = () => {
-        console.log('just button')
+    const onClickFilterHandler = (nameButton: FilterType) => {
+        setBtn(nameButton)
     }
-    const NewBTNFoo = () => {
-        console.log('NEW_BTN_FOO')
-    }
-    const LBTNFOO = () => {
-        console.log('LBTNFOO READY')
-    }
+
     return (
         <div className={'App'}>
-            <Btn title={'MyYoutubeChanel-1'} callBack={()=>Button1Foo('im vasya', 21)}/>
-            <Btn title={'MyYoutubeChanel-2'} callBack={()=>Button2Foo('im ivan', 23)}/>
-            <Btn title={'MyYoutubeChanel-2'} callBack={()=>Button3Foo()}/>
-
-            <NewBtn title={'NewBTN-1'} callBack={()=>NewBTNFoo()}/>
-
-            <LBTN title={'LBTN'} callBack={()=>LBTNFOO()}/>
-
+            <ul>
+                {currentMoney.map((objectFromMoneyArr, index) => {
+                    return (
+                        <li key={index}>
+                            <span>{objectFromMoneyArr.banknots}</span> |
+                            <span>{objectFromMoneyArr.value}</span> |
+                            <span>{objectFromMoneyArr.number}</span>
+                        </li>
+                    );
+                })}
+            </ul>
+            <button onClick={() => onClickFilterHandler('all')}>All</button>
+            <button onClick={() => onClickFilterHandler('RUBLES')}>Ruble</button>
+            <button onClick={() => onClickFilterHandler('Dollars')}>Dollar</button>
         </div>
     );
 }
